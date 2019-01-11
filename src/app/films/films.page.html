@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Liste Des Films</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-searchbar
+  [(ngModel)]="myInput"
+  (ionChange)="onInput($event)">
+</ion-searchbar>
+
+<ion-content padding>
+  <ion-content>
+   <ion-card *ngFor="let item of infoMovies" *ngIf="infoMovies"> 
+    <ion-card-header>
+      <ion-card-title >{{infoMovies.Title}}</ion-card-title>
+    </ion-card-header>
+   </ion-card>
+  </ion-content>
+</ion-content>
