@@ -1,0 +1,20 @@
+ion-card{
+    max-width: 30em;
+}
+
+img{
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    border: 1px solid black;
+}
+
+img:hover{
+    opacity: 0.7;
+}
+
+.info{
+    padding: 1em;
+    vertical-align:middle;
+    color: black;
+}

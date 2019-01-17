@@ -36,8 +36,8 @@ export class FilmServiceService {
       catchError(this.handleError));
   }
   
-  getInfoMoviesByTitle(titre: string): Observable<any> {
-    const url = `${apiUrl}&s=${titre}`;
+  getInfoByTitle(titre: string,type: string,page): Observable<any> {
+    const url = `${apiUrl}&s=${titre}&type=${type}&page=${page}`;
     return this.http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));

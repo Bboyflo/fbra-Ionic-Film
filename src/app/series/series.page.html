@@ -3,7 +3,35 @@
     <ion-title>Liste Des Séries</ion-title>
   </ion-toolbar>
 </ion-header>
+  
+<ion-searchbar
+  [(ngModel)]="searchTitle"
+  (ionChange)="getInfoSeries()"
+  placeholder="Rechercher une série">
+</ion-searchbar>
 
 <ion-content padding>
+  <ion-list *ngIf="findSeries">
+    <div *ngFor="let infoMovies of allInfoSeries">
+      <ion-card padding>
+        <p>{{infoMovies.Title}}</p>
+        <p>Année de sortie : {{infoMovies.Year}}</p>
+        <p>Type : {{infoMovies.Type}}</p>
 
+      <div *ngIf="infoMovies.Poster == 'N/A', else elseDisplayPoster">
+        <p>Ce film n'a pas d'affiche</p>
+      </div>
+      <ng-template #elseDisplayPoster>
+          <img src={{infoMovies.Poster}} alt={{infoMovies.Title}}>
+      </ng-template>
+    </ion-card>
+    </div>
+  </ion-list>
+  <ion-infinite-scroll *ngIf="nbPage <= 100" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Chargement des autres films">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
+  

@@ -5,16 +5,35 @@
 </ion-header>
 
 <ion-searchbar
-  [(ngModel)]="myInput"
-  (ionChange)="onInput($event)">
+  [(ngModel)]="searchTitle"
+  (ionChange)="getInfoMovies()" 
+  placeholder="Rechercher un film">
 </ion-searchbar>
 
 <ion-content padding>
-  <ion-content>
-   <ion-card *ngFor="let item of infoMovies" *ngIf="infoMovies"> 
-    <ion-card-header>
-      <ion-card-title >{{infoMovies.Title}}</ion-card-title>
-    </ion-card-header>
-   </ion-card>
-  </ion-content>
+  <ion-list *ngIf="findMovies">
+    <div *ngFor="let infoMovies of allInfoMovies">
+      <ion-card padding>
+        <div class="info">
+          <p>{{infoMovies.Title}}</p>
+          <p>Année de sortie : {{infoMovies.Year}}</p>
+          <p>Type : {{infoMovies.Type}}</p>
+        </div>
+      <div *ngIf="infoMovies.Poster == 'N/A', else elseDisplayPoster">
+        <p>Ce film n'a pas d'affiche</p>
+      </div>
+      <ng-template #elseDisplayPoster>
+          <div (click)="envoisDetail()">
+            <img src={{infoMovies.Poster}} alt={{infoMovies.Title}}>
+          </div>
+      </ng-template>
+    </ion-card>
+    </div>
+  </ion-list>
+  <ion-infinite-scroll *ngIf="nbPage <= 100" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Chargement des autres films">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
