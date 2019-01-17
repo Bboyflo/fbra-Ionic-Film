@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoadingController } from '@ionic/angular';
-import { FilmServiceService } from '../film-service.service';
+import { ApiOMDbService } from '../api-omdb.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-films',
@@ -20,7 +20,7 @@ export class FilmsPage implements OnInit {
   type: string = "movie";
   lastSearchTitle: String = "";
 
-  constructor(public api: FilmServiceService, public loadingController: LoadingController) {
+  constructor(public api: ApiOMDbService, public navCtrl: NavController) {
    }
 
   async getInfoMovies() {
@@ -60,7 +60,8 @@ export class FilmsPage implements OnInit {
     }, 500);
   }
 
-  envoisDetail(){
+  envoisDetail(id: string){
+    this.navCtrl.navigate("details/" + id, {})
   }
 
   ngOnInit() {

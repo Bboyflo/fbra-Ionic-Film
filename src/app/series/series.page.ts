@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LoadingController } from '@ionic/angular';
-import { FilmServiceService } from '../film-service.service';
+import { ApiOMDbService } from '../api-omdb.service';
 
 @Component({
   selector: 'app-series',
@@ -18,7 +18,7 @@ export class SeriesPage implements OnInit {
   type: string = "series";
   lastSearchTitle: string ="";
 
-  constructor(public api: FilmServiceService, public loadingController: LoadingController) {
+  constructor(public api: ApiOMDbService, public loadingController: LoadingController) {
    }
 
   async getInfoSeries() {

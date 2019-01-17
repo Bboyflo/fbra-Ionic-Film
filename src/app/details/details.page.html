@@ -5,5 +5,18 @@
 </ion-header>
 
 <ion-content padding>
-
+    <ion-content padding>
+        <ion-list *ngIf="details">
+          <p>{{details.Title}}</p>
+          <p>Année de sortie : {{details.Year}}</p>
+          <p>Type : {{details.Type}}</p>
+    
+          <div *ngIf="details.Poster == 'N/A', else elseDisplayPoster">
+            <p>Ce film n'a pas d'affiche</p>
+          </div>
+          <ng-template #elseDisplayPoster>
+            <img src={{details.Poster}} alt={{details.Title}}>
+          </ng-template>
+        </ion-list>
+      </ion-content>
 </ion-content>

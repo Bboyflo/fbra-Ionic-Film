@@ -23,7 +23,7 @@
         <p>Ce film n'a pas d'affiche</p>
       </div>
       <ng-template #elseDisplayPoster>
-          <div (click)="envoisDetail()">
+          <div (click)="envoisDetail(infoMovies.imdbID)">
             <img src={{infoMovies.Poster}} alt={{infoMovies.Title}}>
           </div>
       </ng-template>

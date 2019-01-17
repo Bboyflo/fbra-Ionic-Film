@@ -9,7 +9,7 @@ const apiUrl = "http://www.omdbapi.com/?apikey=75522b56";
 @Injectable({
   providedIn: 'root'
 })
-export class FilmServiceService {
+export class ApiOMDbService {
 
   constructor(private http: HttpClient) { }
 
@@ -30,8 +30,9 @@ export class FilmServiceService {
     return body || { };
   }
 
-  getInfoMovies(): Observable<any> {
-    return this.http.get(apiUrl).pipe(
+  getDetails(id: string): Observable<any> {
+    const url = `${apiUrl}&i=${id}&plot=full`;
+    return this.http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
