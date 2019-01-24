@@ -14,6 +14,8 @@ export class DetailsPage implements OnInit {
   id: string;
   details: any;
   nbSeason = [];
+  season: string;
+  isFavorite: boolean = false;
 
   constructor(public api: ApiOMDbService, private route: ActivatedRoute, public navCtrl: NavController) {}
 
@@ -35,6 +37,14 @@ export class DetailsPage implements OnInit {
 
   envoisDetailSeason(Season : string){
     this.navCtrl.navigate("details/"+ this.id + "/season/" + Season, {})
+  }
+
+  toggleFavorite(){
+    if (this.isFavorite) {
+      this.isFavorite = false;
+    } else {
+      this.isFavorite = true;
+    }
   }
 
   ngOnInit() {

@@ -27,7 +27,7 @@ export class FilmsPage implements OnInit {
   async getInfoMovies() {
     await this.api.getInfoByTitle(this.searchTitle.trim(),this.type, this.nbPage)
       .subscribe(res => {
-        console.log(res);
+        //console.log(res);
 
         if (this.searchTitle.trim() == ""){
           this.findMovies = false;
@@ -39,14 +39,15 @@ export class FilmsPage implements OnInit {
         if (this.lastSearchTitle != this.searchTitle){
           this.allInfoMovies = [];
         }
+
         if(res.Response == "False")
         {
-          this.findMovies = true;
+          this.findMovies = false;
           this.allInfoMovies = [];
         }
         else
         {
-          this.findMovies = false;
+          this.findMovies = true;
         for(let i=0; i<this.infoMovies.Search.length; i++)
           {
             this.allInfoMovies.push(this.infoMovies.Search[i]);
@@ -61,9 +62,14 @@ export class FilmsPage implements OnInit {
   doInfinite(infiniteScroll){
     //console.log('Begin async operation');
 
+    console.log(this.infoMovies.totalResults);
+    console.log(this.allInfoMovies.length);
     setTimeout(async() => {
-      this.nbPage++;
-      this.getInfoMovies();
+
+      if (this.allInfoMovies.length < this.infoMovies.totalResults){
+        this.nbPage++;
+        this.getInfoMovies();
+      }
 
       //console.log('Async operation has ended');
       infiniteScroll.target.complete();

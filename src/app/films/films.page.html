@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Liste Des Films</ion-title>
-    <button ion-button large slot="secondary" (click)="hideSearchBar($event)" ><ion-icon name="search"></ion-icon></button>
+    <button ion-button large incon-only slot="secondary" style="font-size: 1.7em" (click)="hideSearchBar($event)" ><ion-icon name="search"></ion-icon></button>
   </ion-toolbar>
 </ion-header>
 
-<ion-searchbar *ngIf="displaySearchBar == true"
+<ion-searchbar *ngIf="displaySearchBar"
   [(ngModel)]="searchTitle"
   (ionChange)="getInfoMovies()" 
   placeholder="Rechercher un film">

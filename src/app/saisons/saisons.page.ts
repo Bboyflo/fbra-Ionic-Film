@@ -15,18 +15,19 @@ export class SaisonsPage implements OnInit {
   season: string;
   detailsSeason: any;
   nbEpidode = [];
+  episode: string;
 
   constructor(public api: ApiOMDbService, private route: ActivatedRoute, public navCtrl: NavController) { }
 
   async getInfosSeason() {
     await this.api.getDetailsSeason(this.id, this.season)
       .subscribe(res => {
-        console.log(res);
+        //console.log(res);
 
         this.detailsSeason = res;
-        
-        for (let i = 1; i <= this.detailsSeason.Episodes.length ; i++){
-          this.nbEpidode.push(i);
+        for (let i = 0; i < this.detailsSeason.Episodes.length ; i++){
+          this.episode = this.detailsSeason.Episodes[i].Episode;
+          this.nbEpidode.push(this.episode);
         }
 
       }, err => {

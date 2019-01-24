@@ -17,6 +17,7 @@ export class SeriesPage implements OnInit {
   nbPage: number = 1;
   type: string = "series";
   lastSearchTitle: string ="";
+  displaySearchBar: boolean = false;
 
   constructor(public api: ApiOMDbService,  public navCtrl: NavController) {
    }
@@ -39,18 +40,19 @@ export class SeriesPage implements OnInit {
 
         if(res.Response == "False")
         {
-          this.findSeries = true;
+          this.findSeries = false;
           this.allInfoSeries = [];
         }
         else
         {
-          this.findSeries = false;
+          this.findSeries = true;
           for(let i=0; i<this.infoSeries.Search.length; i++)
           {
             this.allInfoSeries.push(this.infoSeries.Search[i]);
           }
         }
         
+        this.lastSearchTitle = this.searchTitle;
 
       }, err => {
         console.log(err);
@@ -61,8 +63,10 @@ export class SeriesPage implements OnInit {
     //console.log('Begin async operation');
 
     setTimeout(async() => {
-      this.nbPage++;
-      this.getInfoSeries();
+      if (this.allInfoSeries.length < this.infoSeries.totalResults){
+        this.nbPage++;
+        this.getInfoSeries();
+      }
 
       //console.log('Async operation has ended');
       infiniteScroll.target.complete();
@@ -71,6 +75,10 @@ export class SeriesPage implements OnInit {
 
   envoisDetail(id: string){
     this.navCtrl.navigate("details/" + id, {})
+  }
+
+  hideSearchBar(){
+    this.displaySearchBar = !this.displaySearchBar;
   }
   
   ngOnInit() {
