@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="titleSerie && season && episode">Details {{titleSerie}} season {{season}} episode {{season}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-content padding *ngIf="detailEpisode">          
+    <p><strong>Title</strong> : {{detailEpisode.Title}}</p>
+    <p><strong>Released</strong> : {{detailEpisode.Released}}</p>
+    <p><strong>Runtime</strong> : {{detailEpisode.Runtime}}</p>
+    <p><strong>Plot</strong> : {{detailEpisode.Plot}}</p>
+    <p><strong>imdbRating</strong> : {{detailEpisode.imdbRating}} / <strong>imdbVotes</strong> : {{detailEpisode.imdbVotes}}</p>
+  </ion-content>
+</ion-content>

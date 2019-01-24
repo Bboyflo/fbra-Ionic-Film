@@ -30,15 +30,30 @@ export class ApiOMDbService {
     return body || { };
   }
 
+  getInfoByTitle(titre: string,type: string,page): Observable<any> {
+    const url = `${apiUrl}&s=${titre}&type=${type}&page=${page}`;
+    return this.http.get(url).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
   getDetails(id: string): Observable<any> {
     const url = `${apiUrl}&i=${id}&plot=full`;
+    console.log(url);
+    return this.http.get(url).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getDetailsSeason(id: string, nbSeason: string): Observable<any> {
+    const url = `${apiUrl}&i=${id}&Season=${nbSeason}`;
     return this.http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
-  getInfoByTitle(titre: string,type: string,page): Observable<any> {
-    const url = `${apiUrl}&s=${titre}&type=${type}&page=${page}`;
+  getDetailsEpisode(id: string, nbSeason: string, nbEpisode: string): Observable<any> {
+    const url = `${apiUrl}&i=${id}&Season=${nbSeason}&episode=${nbEpisode}`;
     return this.http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));

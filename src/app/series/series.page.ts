@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoadingController } from '@ionic/angular';
 import { ApiOMDbService } from '../api-omdb.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-series',
@@ -18,7 +18,7 @@ export class SeriesPage implements OnInit {
   type: string = "series";
   lastSearchTitle: string ="";
 
-  constructor(public api: ApiOMDbService, public loadingController: LoadingController) {
+  constructor(public api: ApiOMDbService,  public navCtrl: NavController) {
    }
 
   async getInfoSeries() {
@@ -37,10 +37,20 @@ export class SeriesPage implements OnInit {
           this.allInfoSeries = [];
         }
 
-        for(let i=0; i<this.infoSeries.Search.length; i++)
+        if(res.Response == "False")
+        {
+          this.findSeries = true;
+          this.allInfoSeries = [];
+        }
+        else
+        {
+          this.findSeries = false;
+          for(let i=0; i<this.infoSeries.Search.length; i++)
           {
             this.allInfoSeries.push(this.infoSeries.Search[i]);
           }
+        }
+        
 
       }, err => {
         console.log(err);
@@ -59,6 +69,10 @@ export class SeriesPage implements OnInit {
     }, 500);
   }
 
+  envoisDetail(id: string){
+    this.navCtrl.navigate("details/" + id, {})
+  }
+  
   ngOnInit() {
   }
 

@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="detailsSeason && season">Details {{detailsSeason.Title}} season {{season}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngFor="let Episode of nbEpidode" (click)="envoisDetailEpisode(Episode)">
+    <ion-card>
+        <p>Episode {{Episode}}</p>
+    </ion-card>
+  </ion-list>
+</ion-content>

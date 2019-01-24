@@ -12,17 +12,19 @@
 
 <ion-content padding>
   <ion-list *ngIf="findSeries">
-    <div *ngFor="let infoMovies of allInfoSeries">
+    <div *ngFor="let infoSeries of allInfoSeries">
       <ion-card padding>
-        <p>{{infoMovies.Title}}</p>
-        <p>Année de sortie : {{infoMovies.Year}}</p>
-        <p>Type : {{infoMovies.Type}}</p>
+        <p>{{infoSeries.Title}}</p>
+        <p>Année de sortie : {{infoSeries.Year}}</p>
+        <p>Type : {{infoSeries.Type}}</p>
 
-      <div *ngIf="infoMovies.Poster == 'N/A', else elseDisplayPoster">
+      <div *ngIf="infoSeries.Poster == 'N/A', else elseDisplayPoster">
         <p>Ce film n'a pas d'affiche</p>
       </div>
       <ng-template #elseDisplayPoster>
-          <img src={{infoMovies.Poster}} alt={{infoMovies.Title}}>
+        <div (click)="envoisDetail(infoSeries.imdbID)">
+          <img src={{infoSeries.Poster}} alt={{infoSeries.Title}}>
+        </div>
       </ng-template>
     </ion-card>
     </div>

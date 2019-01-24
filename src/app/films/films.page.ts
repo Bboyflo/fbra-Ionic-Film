@@ -19,6 +19,7 @@ export class FilmsPage implements OnInit {
   nbPage: number = 1;
   type: string = "movie";
   lastSearchTitle: String = "";
+  displaySearchBar: boolean = false;
 
   constructor(public api: ApiOMDbService, public navCtrl: NavController) {
    }
@@ -26,7 +27,7 @@ export class FilmsPage implements OnInit {
   async getInfoMovies() {
     await this.api.getInfoByTitle(this.searchTitle.trim(),this.type, this.nbPage)
       .subscribe(res => {
-        //console.log(res);
+        console.log(res);
 
         if (this.searchTitle.trim() == ""){
           this.findMovies = false;
@@ -38,10 +39,19 @@ export class FilmsPage implements OnInit {
         if (this.lastSearchTitle != this.searchTitle){
           this.allInfoMovies = [];
         }
+        if(res.Response == "False")
+        {
+          this.findMovies = true;
+          this.allInfoMovies = [];
+        }
+        else
+        {
+          this.findMovies = false;
         for(let i=0; i<this.infoMovies.Search.length; i++)
           {
             this.allInfoMovies.push(this.infoMovies.Search[i]);
           }
+        }
         this.lastSearchTitle = this.searchTitle
       }, err => {
         console.log(err);
@@ -62,6 +72,10 @@ export class FilmsPage implements OnInit {
 
   envoisDetail(id: string){
     this.navCtrl.navigate("details/" + id, {})
+  }
+
+  hideSearchBar(){
+    this.displaySearchBar = !this.displaySearchBar;
   }
 
   ngOnInit() {

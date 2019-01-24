@@ -5,18 +5,28 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-content padding>
-        <ion-list *ngIf="details">
-          <p>{{details.Title}}</p>
-          <p>Année de sortie : {{details.Year}}</p>
-          <p>Type : {{details.Type}}</p>
-    
-          <div *ngIf="details.Poster == 'N/A', else elseDisplayPoster">
-            <p>Ce film n'a pas d'affiche</p>
-          </div>
-          <ng-template #elseDisplayPoster>
-            <img src={{details.Poster}} alt={{details.Title}}>
-          </ng-template>
-        </ion-list>
-      </ion-content>
+    <ion-content padding *ngIf="details">          
+      <div *ngIf="details.Poster == 'N/A', else elseDisplayPoster">
+        <p>Ce film n'a pas d'affiche</p>
+      </div>
+      <ng-template #elseDisplayPoster>
+        <img src={{details.Poster}} alt={{details.Title}}>
+      </ng-template>
+
+      <p><Strong>Title</Strong> : {{details.Title}}</p>
+      <p><Strong>Year</Strong> : {{details.Year}}</p>
+      <p><Strong>Rated</Strong> : {{details.Rated}}</p>
+      <p><Strong>Genre</Strong> : {{details.Genre}}</p>
+      <p *ngIf="details.Type == 'movie'"><Strong>Runtime</Strong> : {{details.Runtime}}</p>
+      <p><Strong>Director</Strong> : {{details.Director}}</p>
+      <p><Strong>Actors</Strong> : {{details.Actors}}</p>
+      <p><Strong>Awards</Strong> : {{details.Awards}}</p>
+      <p><Strong>imdbRating</Strong> : {{details.imdbRating}} / <Strong>imdbVotes</Strong> : {{details.imdbVotes}}</p>
+      <p><Strong>Website</Strong> : {{details.Website}}</p>
+      <p><Strong>Plot</Strong> : {{details.Plot}}</p>
+      <div *ngIf="details.Type == 'series'">
+        <p><Strong>List seasons</Strong></p>
+        <ion-list *ngFor="let nbSerie of nbSeason" (click)="envoisDetailSeason(nbSerie)">Season {{nbSerie}}</ion-list>
+      </div>
+    </ion-content>
 </ion-content>
