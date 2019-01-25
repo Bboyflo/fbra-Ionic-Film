@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Details</ion-title>
-    <ion-buttons end>
-        <button ion-button incon-only large slot="secondary" style="font-size: 1.7em" (click)=toggleFavorite()>
-            <ion-icon [name]="isFavorite ? 'star':'star-outline'"></ion-icon>
-        </button>
-      </ion-buttons>
+    <ion-buttons slot="secondary">
+      <button ion-button style="font-size: 1.7em; " (click)=toggleFavorite()>
+          <ion-icon [name]="isFavorite ? 'star':'star-outline'"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

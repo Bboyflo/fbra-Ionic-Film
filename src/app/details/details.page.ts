@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ApiOMDbService } from '../api-omdb.service';
+import { ApiOMDbService } from '../Services/api-omdb.service';
+import { DbFavorisService } from '../Services/db-favoris.service';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -15,14 +16,14 @@ export class DetailsPage implements OnInit {
   details: any;
   nbSeason = [];
   season: string;
-  isFavorite: boolean = false;
+  isFavorite: boolean;
 
-  constructor(public api: ApiOMDbService, private route: ActivatedRoute, public navCtrl: NavController) {}
+  constructor(public api: ApiOMDbService, private route: ActivatedRoute, public navCtrl: NavController, private DbFavorisService: DbFavorisService) {}
 
    async getInfos() {
     await this.api.getDetails(this.id)
       .subscribe(res => {
-        console.log(res);
+        //console.log(res);
 
         this.details = res;
 
@@ -40,12 +41,14 @@ export class DetailsPage implements OnInit {
   }
 
   toggleFavorite(){
-    if (this.isFavorite) {
-      this.isFavorite = false;
-    } else {
-      this.isFavorite = true;
-    }
+    this.isFavorite = !this.isFavorite;
+    this.DbFavorisService.toogleFavoriteMovie(this.details);
   }
+
+  ionViewDidEnter() {
+   this.DbFavorisService.isFavortieMovie(this.details)
+      .then(value => (this.isFavorite = value));
+    }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');

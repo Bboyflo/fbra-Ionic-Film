@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ApiOMDbService } from '../api-omdb.service';
+import { ApiOMDbService } from '../Services/api-omdb.service';
 import { NavController } from '@ionic/angular';
 
 @Component({

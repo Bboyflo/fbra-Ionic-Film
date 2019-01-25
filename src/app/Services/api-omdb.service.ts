@@ -39,7 +39,7 @@ export class ApiOMDbService {
 
   getDetails(id: string): Observable<any> {
     const url = `${apiUrl}&i=${id}&plot=full`;
-    console.log(url);
+    //console.log(url);
     return this.http.get(url).pipe(
       map(this.extractData),
       catchError(this.handleError));

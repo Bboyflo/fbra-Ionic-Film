@@ -37,14 +37,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'tabs/films',
+        redirectTo: '/tabs/films',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'tabs/films',
+    redirectTo: '/tabs/films',
     pathMatch: 'full'
   }
 ];
