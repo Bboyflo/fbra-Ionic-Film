@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FavorisPage } from './favoris.page';
+import { FavorisPage } from './favoris.page'; 
 
 const routes: Routes = [
   {

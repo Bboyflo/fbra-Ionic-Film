@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DbFavorisService } from '../Services/db-favoris.service';
 import { NavController } from '@ionic/angular';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-favoris',
@@ -11,7 +12,7 @@ export class FavorisPage implements OnInit {
 
   favoriteMovies= [];
 
-  constructor(private DbFavorisService: DbFavorisService, public navCtrl: NavController) {}
+  constructor(private DbFavorisService: DbFavorisService, public navCtrl: NavController, private file: File) {}
  
   ionViewDidLoad() {
     console.log("ionViewDidLoad MyMoviesPage");
@@ -21,8 +22,24 @@ export class FavorisPage implements OnInit {
     //console.log('ionViewWillEnter');
     this.favoriteMovies = [];
     this.initFavoriteMovies();
+    this.file.writeFile(this.file.externalRootDirectory + '/Download/', 'JsonFavorites', JSON.stringify(this.favoriteMovies), {replace:true});
+
+    this.presentAlert();
   }
- 
+
+  async presentAlert() {
+    const alertController = document.querySelector('ion-alert-controller');
+    await alertController.componentOnReady();
+  
+    const alert = await alertController.create({
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'URL : ' + this.file.externalRootDirectory + '/Download/' + ' / JSON : ' + JSON.stringify(this.favoriteMovies),
+      buttons: ['OK']
+    });
+    return await alert.present();
+  }
+
   private initFavoriteMovies() {
     this.DbFavorisService
       .getFavoriteMovies()
