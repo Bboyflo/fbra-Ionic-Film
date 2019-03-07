@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DbFavorisService } from '../Services/db-favoris.service';
 import { NavController } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
 
 @Component({
   selector: 'app-favoris',
@@ -12,7 +13,8 @@ export class FavorisPage implements OnInit {
 
   favoriteMovies= [];
 
-  constructor(private DbFavorisService: DbFavorisService, public navCtrl: NavController, private file: File) {}
+  constructor(private DbFavorisService: DbFavorisService, public navCtrl: NavController, private file: File,
+     private fileChooser: FileChooser) {}
  
   ionViewDidLoad() {
     console.log("ionViewDidLoad MyMoviesPage");
@@ -22,22 +24,37 @@ export class FavorisPage implements OnInit {
     //console.log('ionViewWillEnter');
     this.favoriteMovies = [];
     this.initFavoriteMovies();
-    this.file.writeFile(this.file.externalRootDirectory + '/Download/', 'JsonFavorites', JSON.stringify(this.favoriteMovies), {replace:true});
-
-    this.presentAlert();
   }
 
-  async presentAlert() {
-    const alertController = document.querySelector('ion-alert-controller');
-    await alertController.componentOnReady();
-  
-    const alert = await alertController.create({
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'URL : ' + this.file.externalRootDirectory + '/Download/' + ' / JSON : ' + JSON.stringify(this.favoriteMovies),
-      buttons: ['OK']
-    });
-    return await alert.present();
+
+  exportJSON(){
+    if (this.favoriteMovies != null){
+      this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.json', JSON.stringify(this.favoriteMovies), {replace:true});
+      alert("l'export a fonctionné");
+    } else {
+      alert("Vous n'avez pas de favoris à exporter");
+    }
+  }
+
+  importJSON(){
+    this.fileChooser.open()
+    .then(uri => uri)
+    .catch(e => console.log(e));
+  }
+
+  exportCSV(){
+    if (this.favoriteMovies != null){
+      this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.csv', this.favoriteMovies, {replace:true});
+      alert("l'export a fonctionné");
+    } else {
+      alert("Vous n'avez pas de favoris à exporter");
+    }
+  }
+
+  importCSV(){
+    this.fileChooser.open()
+    .then(uri => uri)
+    .catch(e => console.log(e));
   }
 
   private initFavoriteMovies() {

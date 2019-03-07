@@ -25,7 +25,7 @@ export class EpisodesPage implements OnInit {
   async getInfosEpisode() {
     await this.api.getDetailsEpisode(this.id, this.season, this.episode)
       .subscribe(res => {
-        console.log(res);
+        //console.log(res);
 
         this.detailEpisode = res;
 

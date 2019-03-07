@@ -10,30 +10,15 @@ const routes: Routes = [
     children: [
       {
         path: 'films',
-        children: [
-          {
-            path: '',
-            loadChildren: '../films/films.module#FilmsPageModule'
-          }
-        ]
+        loadChildren: '../films/films.module#FilmsPageModule'
       },
       {
         path: 'series',
-        children: [
-          {
-            path: '',
-            loadChildren: '../series/series.module#SeriesPageModule'
-          }
-        ]
+        loadChildren: '../series/series.module#SeriesPageModule'
       },
       {
         path: 'favoris',
-        children: [
-          {
-            path: '',
-            loadChildren: '../favoris/favoris.module#FavorisPageModule'
-          }
-        ]
+        loadChildren: '../favoris/favoris.module#FavorisPageModule'
       },
       {
         path: '',
