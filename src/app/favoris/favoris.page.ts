@@ -28,7 +28,7 @@ export class FavorisPage implements OnInit {
 
 
   exportJSON(){
-    if (this.favoriteMovies != null){
+    if (this.favoriteMovies.length != 0){
       this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.json', JSON.stringify(this.favoriteMovies), {replace:true});
       alert("l'export a fonctionné");
     } else {
@@ -43,14 +43,9 @@ export class FavorisPage implements OnInit {
   }
 
   exportCSV(){
-    if (this.favoriteMovies != null){
-      this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.csv', this.favoriteMovies, {replace:true});
-      alert("l'export a fonctionné");
-    } else {
-      alert("Vous n'avez pas de favoris à exporter");
-    }
-  }
 
+  }
+  
   importCSV(){
     this.fileChooser.open()
     .then(uri => uri)

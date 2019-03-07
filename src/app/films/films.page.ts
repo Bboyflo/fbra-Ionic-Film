@@ -1,3 +1,4 @@
+import { moviesModel } from './../model/moviesModel';
 import { Component, OnInit } from '@angular/core';
 
 import { ApiOMDbService } from '../Services/api-omdb.service';
@@ -12,7 +13,7 @@ import { NavController } from '@ionic/angular';
 export class FilmsPage implements OnInit {
 
   
-  infoMovies: any;
+  infoMovies: moviesModel;
   searchTitle: string;
   findMovies: boolean;
   allInfoMovies = [];
@@ -48,11 +49,12 @@ export class FilmsPage implements OnInit {
         else
         {
           this.findMovies = true;
-        for(let i=0; i<this.infoMovies.Search.length; i++)
+        for(let i=0; i< parseInt(this.infoMovies.totalResults); i++)
           {
-            this.allInfoMovies.push(this.infoMovies.Search[i]);
+            this.allInfoMovies.push(this.infoMovies[i]);
           }
         }
+        console.log(this.allInfoMovies);
         this.lastSearchTitle = this.searchTitle
       }, err => {
         console.log(err);
@@ -62,11 +64,11 @@ export class FilmsPage implements OnInit {
   doInfinite(infiniteScroll){
     //console.log('Begin async operation');
 
-    console.log(this.infoMovies.totalResults);
-    console.log(this.allInfoMovies.length);
+    //console.log(this.infoMovies.totalResults);
+    //console.log(this.allInfoMovies.length);
     setTimeout(async() => {
 
-      if (this.allInfoMovies.length < this.infoMovies.totalResults){
+      if (this.allInfoMovies.length < parseInt(this.infoMovies.totalResults)){
         this.nbPage++;
         this.getInfoMovies();
       }

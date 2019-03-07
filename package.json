@@ -41,6 +41,7 @@
     "cordova-sqlite-storage": "^2.6.0",
     "core-js": "^2.5.4",
     "ngx-csv": "^0.3.1",
+    "papaparse": "^4.6.3",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
