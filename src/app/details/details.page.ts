@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiOMDbService } from '../Services/api-omdb.service';
 import { DbFavorisService } from '../Services/db-favoris.service';
 import { NavController } from '@ionic/angular';
+import { detailsMoviesModel } from '../model/detailsMoviesModel';
 
 @Component({
   selector: 'app-details',

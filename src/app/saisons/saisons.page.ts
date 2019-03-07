@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ApiOMDbService } from '../Services/api-omdb.service';
 import { NavController } from '@ionic/angular';
+import { seasonsModel } from '../model/seasonsModel';
+import { episodesModel } from '../model/episodesModel';
 
 @Component({
   selector: 'app-saisons',
@@ -13,8 +15,8 @@ export class SaisonsPage implements OnInit {
 
   id: string;
   season: string;
-  detailsSeason: any;
-  nbEpidode = [];
+  detailsSeason: Array<seasonsModel>;
+  nbEpidode: Array<string>;
   episode: string;
 
   constructor(public api: ApiOMDbService, private route: ActivatedRoute, public navCtrl: NavController) { }
@@ -25,8 +27,8 @@ export class SaisonsPage implements OnInit {
         //console.log(res);
 
         this.detailsSeason = res;
-        for (let i = 0; i < this.detailsSeason.Episodes.length ; i++){
-          this.episode = this.detailsSeason.Episodes[i].Episode;
+        for (let i = 0; i < this.detailsSeason.length ; i++){
+          this.episode = this.detailsSeason[i].Episodes.Episode;
           this.nbEpidode.push(this.episode);
         }
 

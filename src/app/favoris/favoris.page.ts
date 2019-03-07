@@ -30,7 +30,7 @@ export class FavorisPage implements OnInit {
   exportJSON(){
     if (this.favoriteMovies.length != 0){
       this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.json', JSON.stringify(this.favoriteMovies), {replace:true});
-      alert("l'export a fonctionné");
+      alert("l'export a fonctionné, le chemin du fichier est : " + this.file.externalRootDirectory + '/Downloads/');
     } else {
       alert("Vous n'avez pas de favoris à exporter");
     }

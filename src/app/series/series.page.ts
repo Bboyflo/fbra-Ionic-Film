@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ApiOMDbService } from '../Services/api-omdb.service';
 import { NavController } from '@ionic/angular';
+import { seriesModel } from '../model/seriesModel';
+import { searchModel } from '../model/searchModel';
 
 @Component({
   selector: 'app-series',
@@ -10,10 +12,10 @@ import { NavController } from '@ionic/angular';
 })
 export class SeriesPage implements OnInit {
 
-  infoSeries: any;
+  infoSeries: searchModel;
   searchTitle: string;
   findSeries: boolean;
-  allInfoSeries = [];
+  allInfoSeries: Array<seriesModel>;
   nbPage: number = 1;
   type: string = "series";
   lastSearchTitle: string ="";
@@ -46,8 +48,9 @@ export class SeriesPage implements OnInit {
         else
         {
           this.findSeries = true;
-          for(let i=0; i<this.infoSeries.Search.length; i++)
+          for(let i=0; i< this.infoSeries.Search.length ; i++)
           {
+            //@ts-ignore
             this.allInfoSeries.push(this.infoSeries.Search[i]);
           }
         }
@@ -63,7 +66,7 @@ export class SeriesPage implements OnInit {
     //console.log('Begin async operation');
 
     setTimeout(async() => {
-      if (this.allInfoSeries.length < this.infoSeries.totalResults){
+      if (this.allInfoSeries.length < parseInt(this.infoSeries.totalResults)){
         this.nbPage++;
         this.getInfoSeries();
       }
