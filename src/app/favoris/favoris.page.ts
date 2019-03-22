@@ -3,6 +3,7 @@ import { DbFavorisService } from '../Services/db-favoris.service';
 import { NavController } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-favoris',
@@ -11,14 +12,12 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 })
 export class FavorisPage implements OnInit {
 
-  favoriteMovies= [];
+  favoriteMovies = [];
+  filePath: string = "";
+  fileName: string = "";
 
   constructor(private DbFavorisService: DbFavorisService, public navCtrl: NavController, private file: File,
-     private fileChooser: FileChooser) {}
- 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad MyMoviesPage");
-  }
+     private fileChooser: FileChooser, public platform: Platform) {}
  
   ionViewWillEnter() {
     //console.log('ionViewWillEnter');
@@ -26,20 +25,30 @@ export class FavorisPage implements OnInit {
     this.initFavoriteMovies();
   }
 
-
   exportJSON(){
-    if (this.favoriteMovies.length != 0){
-      this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.json', JSON.stringify(this.favoriteMovies), {replace:true});
-      alert("l'export a fonctionné, le chemin du fichier est : " + this.file.externalRootDirectory + '/Downloads/');
-    } else {
-      alert("Vous n'avez pas de favoris à exporter");
+    if(this.platform.is('android')) {
+      if (this.favoriteMovies.length != 0){
+        this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.json', JSON.stringify(this.favoriteMovies), {replace:true});
+        alert("l'export a fonctionné, le chemin du fichier est : " + this.file.externalRootDirectory + '/Downloads/');
+      } else {
+        alert("Vous n'avez pas de favoris à exporter");
+      }
     }
   }
 
   importJSON(){
-    this.fileChooser.open()
-    .then(uri => uri)
-    .catch(e => console.log(e));
+    if(this.platform.is('android')) {
+      this.fileChooser.open().then(uri => {
+        this.file.resolveLocalFilesystemUrl(this.filePath).then(data => {
+          this.fileName = data.name
+          this.file.readAsText(this.filePath, this.fileName).then(favoris => {
+              this.favoriteMovies = JSON.parse(favoris)
+          })
+        })
+      })
+    }
+    alert(this.filePath + " ///// " + this.fileName);
+    alert(this.favoriteMovies);
   }
 
   exportCSV(){
@@ -63,7 +72,7 @@ export class FavorisPage implements OnInit {
   }
  
   goToDetail(movie: any) {
-    console.log(movie)
+    //console.log(movie)
     if (movie.Type == "episode"){
       this.navCtrl.navigate("details/" + movie.seriesID + "/season/" + movie.Season + "/episode/" + movie.Episode, {});
     } else {

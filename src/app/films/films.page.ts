@@ -1,9 +1,9 @@
-import { moviesModel } from './../model/moviesModel';
+import { MoviesModel } from '../model/MoviesModel';
 import { Component, OnInit } from '@angular/core';
 
 import { ApiOMDbService } from '../Services/api-omdb.service';
 import { NavController } from '@ionic/angular';
-import { searchModel } from '../model/searchModel';
+import { SearchModel } from '../model/SearchModel';
 
 @Component({
   selector: 'app-films',
@@ -14,10 +14,10 @@ import { searchModel } from '../model/searchModel';
 export class FilmsPage implements OnInit {
 
   
-  infoMovies: searchModel;
+  infoMovies: SearchModel;
   searchTitle: string;
   findMovies: boolean;
-  allInfoMovies: Array<moviesModel>;
+  allInfoMovies: Array<MoviesModel>;
   nbPage: number = 1;
   type: string = "movie";
   lastSearchTitle: String = "";
@@ -56,7 +56,7 @@ export class FilmsPage implements OnInit {
             this.allInfoMovies.push(this.infoMovies.Search[i]);
           }
         }
-        console.log(this.allInfoMovies);
+        //console.log(this.allInfoMovies);
         this.lastSearchTitle = this.searchTitle;
       }, err => {
         console.log(err);

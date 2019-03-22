@@ -1,4 +1,4 @@
-import { ratingModel } from "./ratingModel";
+import { RatingModel } from "./RatingModel";
 
 export class detailsSeriesModel {
   Title: string;
@@ -15,7 +15,7 @@ export class detailsSeriesModel {
   Country: string;
   Awards: string;
   Poster: string;
-  Ratings: ratingModel;
+  Ratings: Array<RatingModel>;
   Metascore: string;
   imdbRating: string;
   imdbVotes: string;

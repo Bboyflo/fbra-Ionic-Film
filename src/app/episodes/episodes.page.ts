@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiOMDbService } from '../Services/api-omdb.service';
 import { DbFavorisService } from '../Services/db-favoris.service';
 import { NavController } from '@ionic/angular';
-import { episodesModel } from '../model/episodesModel';
-import { seasonsModel } from '../model/seasonsModel';
+import { EpisodesModel } from '../model/episodesModel';
+import { SeasonsModel } from '../model/SeasonsModel';
 
 @Component({
   selector: 'app-episodes',
@@ -17,8 +17,8 @@ export class EpisodesPage implements OnInit {
   id: string;
   season: string;
   episode: string;
-  detailEpisode: episodesModel;
-  detailSeason: seasonsModel;
+  detailEpisode: EpisodesModel;
+  detailSeason: SeasonsModel;
   titleSerie: string;
   isFavorite: boolean;
 

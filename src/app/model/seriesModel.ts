@@ -1,4 +1,4 @@
-export class seriesModel {
+export class SeriesModel {
   Title: string;
   Year: string;
   imdbID: string;

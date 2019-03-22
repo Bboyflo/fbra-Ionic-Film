@@ -1,6 +1,6 @@
-import { ratingModel } from "./ratingModel";
+import { RatingModel } from "./ratingModel";
 
- export class episodesModel {
+ export class EpisodesModel {
   Title: string;
   Year: string;
   Rated: string;
@@ -17,7 +17,7 @@ import { ratingModel } from "./ratingModel";
   Country: string;
   Awards: string;
   Poster: string;
-  Ratings: ratingModel;
+  Ratings: Array<RatingModel>;
   Metascore: string;
   imdbRating: string;
   imdbVotes: string;

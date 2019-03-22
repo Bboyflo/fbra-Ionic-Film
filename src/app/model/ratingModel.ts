@@ -1,4 +1,4 @@
-export class ratingModel {
+export class RatingModel {
   Source: string;
   Value: string;
 }

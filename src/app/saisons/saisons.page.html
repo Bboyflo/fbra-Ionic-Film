@@ -10,9 +10,9 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list *ngFor="let Episode of nbEpidode" (click)="envoisDetailEpisode(Episode)">
-    <ion-card>
-        <p>Episode {{Episode}}</p>
+  <ion-list *ngIf="detailsSeason" >
+    <ion-card *ngFor="let Episode of detailsSeason.Episodes" (click)="envoisDetailEpisode(Episode.Episode)">
+        <p>Episode {{Episode.Episode}}</p>
     </ion-card>
   </ion-list>
 </ion-content>

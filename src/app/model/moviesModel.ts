@@ -1,4 +1,4 @@
-export class moviesModel {
+export class MoviesModel {
   Title: string;
   Year: string;
   imdbID: string;

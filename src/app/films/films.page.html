@@ -13,21 +13,25 @@
 
 <ion-content padding>
   <ion-list *ngIf="findMovies">
-    <ion-card padding *ngFor="let infoMovies of allInfoMovies"> 
-      <div class="info">
-        <p>{{infoMovies.Title}}</p>
-        <p>Année de sortie : {{infoMovies.Year}}</p>
-        <p>Type : {{infoMovies.Type}}</p>
-      </div>
-      <div *ngIf="infoMovies.Poster == 'N/A', else elseDisplayPoster">
-        <p>Ce film n'a pas d'affiche</p>
-      </div>
-      <ng-template #elseDisplayPoster>
-          <div (click)="envoisDetail(infoMovies.imdbID)">
-            <img src={{infoMovies.Poster}} alt={{infoMovies.Title}}>
-          </div>
-      </ng-template>
-    </ion-card>
+    <ion-grid>
+        <ion-row justify-content-center align-items-center>
+          <ion-card padding *ngFor="let infoMovies of allInfoMovies"> 
+            <div class="info">
+              <p>{{infoMovies.Title}}<br/>
+              Année de sortie : {{infoMovies.Year}}<br/>
+              Type : {{infoMovies.Type}}</p>
+              <div *ngIf="infoMovies.Poster == 'N/A', else elseDisplayPoster">
+                <img src="data:image/png;base64,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" alt={{infoMovies.Title}}>
+              </div>
+              <ng-template #elseDisplayPoster>
+                  <div (click)="envoisDetail(infoMovies.imdbID)">
+                    <img src={{infoMovies.Poster}} alt={{infoMovies.Title}}>
+                  </div>
+              </ng-template>
+            </div>
+          </ion-card>
+        </ion-row>
+      </ion-grid>
   </ion-list>
   <ion-infinite-scroll *ngIf="nbPage <= 100" (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content

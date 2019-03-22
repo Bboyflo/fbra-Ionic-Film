@@ -1,11 +1,11 @@
-import { episodesModel } from './episodesModel';
+import { EpisodesModel } from './episodesModel';
 
 
-export class seasonsModel {
+export class SeasonsModel {
   Title: string;
   Season: string;
   totalSeasons: string;
-  Episodes: episodesModel;
+  Episodes: Array<EpisodesModel>;
   Response: string;
 }
 

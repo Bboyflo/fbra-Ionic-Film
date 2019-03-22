@@ -1,7 +1,7 @@
-import { moviesModel } from "./moviesModel";
+import { MoviesModel } from "./MoviesModel";
 
-export class searchModel {
-  Search: moviesModel[];
+export class SearchModel {
+  Search: Array<MoviesModel>;
   totalResults: string;
   Response: string;
 }
