@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { ApiOMDbService } from '../Services/api-omdb.service';
 import { NavController } from '@ionic/angular';
-import { seriesModel } from '../model/seriesModel';
-import { searchModel } from '../model/searchModel';
+import { SeriesModel } from '../model/SeriesModel';
+import { SearchModel } from '../model/SearchModel';
 
+//const urlPoster: string = "http://img.omdbapi.com/?h=600&apikey=75522b56&i=";
 @Component({
   selector: 'app-series',
   templateUrl: './series.page.html',
@@ -12,10 +13,10 @@ import { searchModel } from '../model/searchModel';
 })
 export class SeriesPage implements OnInit {
 
-  infoSeries: searchModel;
+  infoSeries: SearchModel;
   searchTitle: string;
   findSeries: boolean;
-  allInfoSeries: Array<seriesModel>;
+  allInfoSeries: Array<SeriesModel>;
   nbPage: number = 1;
   type: string = "series";
   lastSearchTitle: string ="";
@@ -27,7 +28,7 @@ export class SeriesPage implements OnInit {
   async getInfoSeries() {
     await this.api.getInfoByTitle(this.searchTitle.trim(),this.type, this.nbPage)
       .subscribe(res => {
-        //console.log(res);
+        console.log(res);
 
         if (this.searchTitle.trim() == ""){
           this.findSeries = false;
@@ -35,7 +36,7 @@ export class SeriesPage implements OnInit {
           this.findSeries = true;
         }
         this.infoSeries = res;
-
+    
         if (this.lastSearchTitle != this.searchTitle){
           this.allInfoSeries = [];
         }
@@ -50,8 +51,8 @@ export class SeriesPage implements OnInit {
           this.findSeries = true;
           for(let i=0; i< this.infoSeries.Search.length ; i++)
           {
-            //@ts-ignore
             this.allInfoSeries.push(this.infoSeries.Search[i]);
+            //this.allInfoSeries[i].Poster = urlPoster + this.allInfoSeries[i].imdbID;
           }
         }
         

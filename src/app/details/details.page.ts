@@ -59,4 +59,7 @@ export class DetailsPage implements OnInit {
   backPage(){
     this.navCtrl.goBack();
   }
+
+  downloadImage(){
+  }
 }

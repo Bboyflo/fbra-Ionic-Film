@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button ((click)="backPage()" )></ion-back-button>
+      <ion-back-button (click)="backPage()"></ion-back-button>
     </ion-buttons>
     <ion-title>Details</ion-title>
     <ion-buttons slot="secondary">
@@ -20,7 +20,7 @@
       <ng-template #elseDisplayPoster>
         <img src={{details.Poster}} alt={{details.Title}}>
       </ng-template>
-
+      <button ion-button (click)="downloadImage()" color="secondary">Download File</button>
       <p><Strong>Title</Strong> : {{details.Title}}</p>
       <p><Strong>Year</Strong> : {{details.Year}}</p>
       <p><Strong>Rated</Strong> : {{details.Rated}}</p>

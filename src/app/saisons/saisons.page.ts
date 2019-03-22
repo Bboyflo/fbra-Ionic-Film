@@ -42,4 +42,7 @@ export class SaisonsPage implements OnInit {
     this.getInfosSeason();
   }
 
+  backPage(){
+    this.navCtrl.goBack();
+  }
 }

@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { Platform } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-favoris',
@@ -17,7 +18,7 @@ export class FavorisPage implements OnInit {
   fileName: string = "";
 
   constructor(private DbFavorisService: DbFavorisService, public navCtrl: NavController, private file: File,
-     private fileChooser: FileChooser, public platform: Platform) {}
+     private fileChooser: FileChooser, public platform: Platform, private actionSheetController:ActionSheetController) {}
  
   ionViewWillEnter() {
     //console.log('ionViewWillEnter');
@@ -25,16 +26,31 @@ export class FavorisPage implements OnInit {
     this.initFavoriteMovies();
   }
 
-  exportJSON(){
+  async exportJSON(){
     if(this.platform.is('android')) {
-      if (this.favoriteMovies.length != 0){
-        this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.json', JSON.stringify(this.favoriteMovies), {replace:true});
-        alert("l'export a fonctionné, le chemin du fichier est : " + this.file.externalRootDirectory + '/Downloads/');
-      } else {
-        alert("Vous n'avez pas de favoris à exporter");
-      }
+      
+        const actionSheet = await this.actionSheetController.create({
+        header: "type de l'export",
+        buttons: [{
+          text: 'JSON',
+          handler: () => {
+            if (this.favoriteMovies.length != 0){
+              this.file.writeFile(this.file.externalRootDirectory + '/Downloads/', 'JsonFavorites.json', JSON.stringify(this.favoriteMovies), {replace:true});
+              alert("l'export a fonctionné, le chemin du fichier est : " + this.file.externalRootDirectory + '/Downloads/');
+            } else {
+              alert("Vous n'avez pas de favoris à exporter");
+            }
+          }
+        }, {
+          text: 'CSV',
+          handler: () => {
+            console.log('Share clicked');
+          }
+        }]
+      });
+      await actionSheet.present();
     }
-  }
+  } 
 
   importJSON(){
     if(this.platform.is('android')) {
