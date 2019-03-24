@@ -1,22 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Liste Des Favoris</ion-title>
+    <ion-buttons slot="secondary">
+      <button ion-button (click)=exportFavorites()>
+          <ion-icon name="cloud-download" color="light"></ion-icon>
+      </button>
+      <button ion-button (click)=importFavorites()>
+          <ion-icon name="cloud-upload" color="light"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
-  
-  <ion-buttons slot="secondary">
-    <button ion-button style="font-size: 1.7em; " (click)=exportJSON()>
-        <ion-icon name="cloud-download"></ion-icon>
-    </button>
-    <button ion-button style="font-size: 1.7em; " (click)=importJSON()>
-        <ion-icon name="cloud-upload"></ion-icon>
-    </button>
-    <button ion-button style="font-size: 1.7em; " (click)=exportCSV()>
-        <ion-icon name="download"></ion-icon>
-    </button>
-    <button ion-button style="font-size: 1.7em; " (click)=importCSV()>
-      <ion-icon name="add-circle"></ion-icon>
-    </button>
-  </ion-buttons>
 </ion-header>
 
 <ion-content>
@@ -29,12 +22,11 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-card *ngIf="favoriteMovies && favoriteMovies.length; else noFavorite">
-    <ion-list>
+    <ion-list lines="none">
       <ion-list-header class="my-movies-header">Favorite Movies</ion-list-header>
       <ion-item *ngFor="let movie of favoriteMovies" (click)="goToDetail(movie)">
-        <ion-row>
           <ion-col col-1>
-            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star" color="light"></ion-icon>
           </ion-col>
           <ion-col col-6 text-wrap>
             <h4>{{movie.Title}}</h4>
@@ -45,7 +37,6 @@
           <ion-col col-2>
             <ion-badge color="primary">{{movie.imdbVotes}}</ion-badge>
           </ion-col>
-        </ion-row>
       </ion-item>
     </ion-list>
     <!--><ion-card-content>

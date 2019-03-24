@@ -1,0 +1,45 @@
+button {
+    background: transparent;
+}
+
+ion-toolbar ion-icon {
+    font-size: 1.3em;
+    padding: .45em;
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 5px;
+    border-radius: 100%;
+    background: #2980b9;
+}
+
+ion-card ion-icon {
+    font-size: 1em;
+    padding: .45em;
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 5px;
+    border-radius: 100%;
+    background: #f39c12;
+}
+
+ion-list {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    background: #bdc3c7;
+}
+
+ion-list-header {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #FFF;
+}
+
+ion-item {
+    display: inline-block;
+    border: 1px solid #ccc;
+    margin: .5em;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}

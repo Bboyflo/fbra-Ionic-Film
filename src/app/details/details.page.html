@@ -5,36 +5,38 @@
     </ion-buttons>
     <ion-title>Details</ion-title>
     <ion-buttons slot="secondary">
-      <button ion-button style="font-size: 1.7em; " (click)=toggleFavorite()>
-          <ion-icon [name]="isFavorite ? 'star':'star-outline'"></ion-icon>
+      <button ion-button class="star" (click)=toggleFavorite()>
+          <ion-icon [name]="isFavorite ? 'star':'star-outline'" color="light"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-content padding *ngIf="details">          
+    <ion-content padding *ngIf="details">
       <div *ngIf="details.Poster == 'N/A', else elseDisplayPoster">
         <p>Ce film n'a pas d'affiche</p>
       </div>
       <ng-template #elseDisplayPoster>
         <img src={{details.Poster}} alt={{details.Title}}>
       </ng-template>
-      <button ion-button (click)="downloadImage()" color="secondary">Download File</button>
-      <p><Strong>Title</Strong> : {{details.Title}}</p>
-      <p><Strong>Year</Strong> : {{details.Year}}</p>
-      <p><Strong>Rated</Strong> : {{details.Rated}}</p>
-      <p><Strong>Genre</Strong> : {{details.Genre}}</p>
-      <p *ngIf="details.Type == 'movie'"><Strong>Runtime</Strong> : {{details.Runtime}}</p>
-      <p><Strong>Director</Strong> : {{details.Director}}</p>
-      <p><Strong>Actors</Strong> : {{details.Actors}}</p>
-      <p><Strong>Awards</Strong> : {{details.Awards}}</p>
-      <p><Strong>imdbRating</Strong> : {{details.imdbRating}} / <Strong>imdbVotes</Strong> : {{details.imdbVotes}}</p>
-      <p><Strong>Website</Strong> : <a href={{details.Website}}>{{details.Website}}</a></p>
-      <p><Strong>Plot</Strong> : {{details.Plot}}</p>
-      <div *ngIf="details.Type == 'series'">
-        <p><Strong>List seasons</Strong></p>
-        <ion-list *ngFor="let nbSerie of nbSeason" (click)="envoisDetailSeason(nbSerie)">Season {{nbSerie}}</ion-list>
+      <div class="dtl">
+        <ion-button ion-button class="download"><a href={{details.Poster}} download={{details.Title}}>Download Poster</a></ion-button>
+        <p><Strong>Title</Strong> : {{details.Title}}</p>
+        <p><Strong>Year</Strong> : {{details.Year}}</p>
+        <p><Strong>Rated</Strong> : {{details.Rated}}</p>
+        <p><Strong>Genre</Strong> : {{details.Genre}}</p>
+        <p *ngIf="details.Type == 'movie'"><Strong>Runtime</Strong> : {{details.Runtime}}</p>
+        <p><Strong>Director</Strong> : {{details.Director}}</p>
+        <p><Strong>Actors</Strong> : {{details.Actors}}</p>
+        <p><Strong>Awards</Strong> : {{details.Awards}}</p>
+        <p><Strong>imdbRating</Strong> : {{details.imdbRating}} / <Strong>imdbVotes</Strong> : {{details.imdbVotes}}</p>
+        <p><Strong>Website</Strong> : <a href={{details.Website}}>{{details.Website}}</a></p>
+        <p><Strong>Plot</Strong> : {{details.Plot}}</p>
+        <div *ngIf="details.Type == 'series'">
+          <p><Strong>List seasons</Strong></p>
+          <ion-list *ngFor="let nbSerie of nbSeason" (click)="envoisDetailSeason(nbSerie)">Season {{nbSerie}}</ion-list>
+        </div>
       </div>
     </ion-content>
 </ion-content>

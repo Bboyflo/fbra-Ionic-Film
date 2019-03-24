@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiOMDbService } from '../Services/api-omdb.service';
 import { DbFavorisService } from '../Services/db-favoris.service';
 import { NavController } from '@ionic/angular';
-import { detailsMoviesModel } from '../model/detailsMoviesModel';
 
 @Component({
   selector: 'app-details',
@@ -19,7 +18,7 @@ export class DetailsPage implements OnInit {
   season: string;
   isFavorite: boolean;
 
-  constructor(public api: ApiOMDbService, private route: ActivatedRoute, public navCtrl: NavController, private DbFavorisService: DbFavorisService) {}
+  constructor(public api: ApiOMDbService, private route: ActivatedRoute, public navCtrl: NavController, private DbFavorisService: DbFavorisService,) {}
 
    async getInfos() {
     await this.api.getDetails(this.id)
@@ -60,6 +59,6 @@ export class DetailsPage implements OnInit {
     this.navCtrl.goBack();
   }
 
-  downloadImage(){
+  downloadImage(image: string) {
   }
 }

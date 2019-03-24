@@ -7,8 +7,8 @@
       <ion-title *ngIf="titleSerie && season && episode">Details {{titleSerie}} season {{season}} episode {{episode}}</ion-title>
     </ion-toolbar>
     <ion-buttons slot="secondary">
-      <button ion-button style="font-size: 1.7em; " (click)=toggleFavorite()>
-          <ion-icon [name]="isFavorite ? 'star':'star-outline'"></ion-icon>
+      <button ion-button class="star" (click)=toggleFavorite()>
+          <ion-icon [name]="isFavorite ? 'star':'star-outline'" color="light"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>

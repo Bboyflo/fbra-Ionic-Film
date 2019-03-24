@@ -1,10 +1,52 @@
-img{
-    border-radius: 10px;
-    width: 100%;
-    height: auto;
-    border: 1px solid black;
+ion-card {
+    display: inline-grid;
+    width: 20em;
+    height: 20em;
+    padding: 0;
+    cursor: pointer;
 }
 
-ion-card{
-    max-width: 30em;
+.info img {
+    z-index:1;
+    border-radius: 5px;
+    opacity: 1;
+    min-height: 20em;
+    transform: scale(1);
+    transition: all 0.5s;
+}
+
+.info:hover img {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.info p {
+    opacity: 0;
+    position:absolute;
+    bottom:0;
+    padding: 5% 2%;
+    width:100%; 
+    color: white;
+    z-index: 2;
+    background-color: rgba(0,0,0,.5);
+    text-align: center;
+    transition: opacity 0.5s;
+}
+
+.info:hover p {
+    opacity: 1;
+}
+
+button {
+    background: transparent;
+}
+
+ion-icon {
+    font-size: 1.3em;
+    padding: .45em;
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 5px;
+    border-radius: 100%;
+    background: #2c3e50;
 }
