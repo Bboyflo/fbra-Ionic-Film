@@ -65,9 +65,6 @@ export class FilmsPage implements OnInit {
 
   doInfinite(infiniteScroll){
     //console.log('Begin async operation');
-
-    //console.log(this.infoMovies.totalResults);
-    //console.log(this.allInfoMovies.length);
     setTimeout(async() => {
 
       if (this.allInfoMovies.length < parseInt(this.infoMovies.totalResults)){

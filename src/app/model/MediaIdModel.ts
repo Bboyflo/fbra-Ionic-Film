@@ -1,6 +1,6 @@
 import { RatingModel } from './RatingModel';
 
-export interface MediaIdModel {
+export interface MoviesIdModel {
     Title:      string;
     Year:       string;
     Rated:      string;

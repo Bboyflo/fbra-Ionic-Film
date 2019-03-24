@@ -26,7 +26,6 @@ export class SaisonsPage implements OnInit {
         //console.log(res);
 
         this.detailsSeason = res;
-
       }, err => {
         console.log(err);
       });

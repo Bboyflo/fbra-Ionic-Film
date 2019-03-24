@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Liste Des Favoris</ion-title>
+    <ion-title>List of Favorites</ion-title>
     <ion-buttons slot="secondary">
       <button ion-button (click)=exportFavorites()>
           <ion-icon name="cloud-download" color="light"></ion-icon>
@@ -23,7 +23,7 @@
   </ion-refresher>
   <ion-card *ngIf="favoriteMovies && favoriteMovies.length; else noFavorite">
     <ion-list lines="none">
-      <ion-list-header class="my-movies-header">Favorite Movies</ion-list-header>
+      <ion-list-header class="my-movies-header">Favorites Movies</ion-list-header>
       <ion-item *ngFor="let movie of favoriteMovies" (click)="goToDetail(movie)">
           <ion-col col-1>
             <ion-icon name="star" color="light"></ion-icon>
@@ -39,17 +39,10 @@
           </ion-col>
       </ion-item>
     </ion-list>
-    <!--><ion-card-content>
-      <p>To choose more movies, click on this button.</p>
-      <button icon-left ion-button full (click)="findMovie()">
-        <ion-icon name="search"></ion-icon>
-        Find a movie
-      </button>
-    </ion-card-content>-->
   </ion-card>
 
   <ng-template #noFavorite>
-    <p>You have no favorites</p>
+    <p>You haven't favorites</p>
   </ng-template>
 
 </ion-content>

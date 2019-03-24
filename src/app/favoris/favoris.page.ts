@@ -1,4 +1,4 @@
-import { MediaIdModel } from './../model/MediaIdModel';
+import { MoviesIdModel } from './../model/MediaIdModel';
 import { FavoriteMovieModel } from './../model/FavoriteMovieModel';
 import { Component, OnInit } from '@angular/core';
 import { DbFavorisService } from '../Services/db-favoris.service';
@@ -15,7 +15,7 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class FavorisPage implements OnInit {
 
-  favoriteMovies: Array<MediaIdModel> = [];
+  favoriteMovies: Array<MoviesIdModel> = [];
   filePath: string = "";
   favoriteMoviesCSVTab : Array<FavoriteMovieModel> = [];
 
@@ -38,7 +38,7 @@ export class FavorisPage implements OnInit {
     if(this.platform.is('android')) {
       
         const actionSheet = await this.actionSheetController.create({
-        header: "type de l'export",
+        header: "Export type",
         buttons: [{
           text: 'JSON',
           icon: 'download',
@@ -60,7 +60,7 @@ export class FavorisPage implements OnInit {
       });
       await actionSheet.present();
     } else {
-      alert("La plate forme utilisé n'est pas android");
+      alert("The platform used is not android");
     }
   } 
 
@@ -68,7 +68,7 @@ export class FavorisPage implements OnInit {
     if(this.platform.is('android')) {
       
         const actionSheet = await this.actionSheetController.create({
-        header: "type de l'export",
+        header: "Import type",
         buttons: [{
           text: 'JSON',
           icon: 'folder',
@@ -90,16 +90,16 @@ export class FavorisPage implements OnInit {
       });
       await actionSheet.present();
     } else {
-      alert("La plate forme utilisé n'est pas android");
+      alert("The platform used is not android");
     }
   } 
 
   exportJSON(){
     if (this.favoriteMovies.length != 0){
       this.file.writeFile(this.file.externalDataDirectory, 'favorites.json', JSON.stringify(this.favoriteMovies), {replace:true});
-      alert("l'export a fonctionné, le chemin du fichier est : " + this.file.externalDataDirectory);
+      alert("The export worked, the file path is : " + this.file.externalDataDirectory);
     } else {
-      alert("Vous n'avez pas de favoris à exporter");
+      alert("You do not have favorites to export");
     }
   }
 
@@ -110,9 +110,9 @@ export class FavorisPage implements OnInit {
         this.favoriteMoviesCSVTab.push(favoriteMoviesCSV);
       }
       this.file.writeFile(this.file.externalRootDirectory + '/Download/', 'CSVFavorites.csv', this.convertObjectToCSV(this.favoriteMoviesCSVTab), { replace: true });
-      alert("l'export a fonctionné, le chemin du fichier est : " + this.file.externalRootDirectory + '/Download/');
+      alert("The export worked, the file path is : " + this.file.externalRootDirectory + '/Download/');
     } else {
-      alert("Vous n'avez pas de favoris à exporter");
+      alert("You do not have favorites to export");
     }
   }
 
@@ -134,7 +134,7 @@ export class FavorisPage implements OnInit {
     }).catch((error) => { console.log('Error when open file chooser', error) });
   }
 
-  async presentAlert(headerAlert: string, subHeaderAlert: string, messageAlert: string) {
+  /*async presentAlert(headerAlert: string, subHeaderAlert: string, messageAlert: string) {
 
     const alert = await this.alertController.create({
       header: headerAlert,
@@ -143,7 +143,7 @@ export class FavorisPage implements OnInit {
       buttons: ['OK']
     });
     return await alert.present();
-  }
+  }*/
 
   importCSV(){
     this.fileChooser.open()
